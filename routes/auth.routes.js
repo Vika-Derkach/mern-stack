@@ -43,7 +43,39 @@ router.post('/register',
 )
 
 // /api/auth + /login
-router.post('/login', async (req, res, next) => {
+router.post('/login', 
+    [
+      check('email', 'Type correct email').normalizeEmail().isEmail(),
+      check('password', 'Type password').exists()
+    ], 
+ async (req, res, next) => {
+  try {  
+      const errors = validationResult(req)
+      if(!errors.isEmpty()) {
+          return res.status(400).json({
+              errors: errors.array(),
+              message: 'Incorrect data during logining'
+          })
+      }
+      const {email, password} = req.body
+      //шукаємо ВЖЕ СТВОРЕНОГО USER IN DATABASE
+      const user = await User.findOne({email})
 
+      //якщо немає такого user то викидаємо помилку
+      if(!user) {
+        return res.status(400).json({message: 'The User hasn\'t been found'})
+      }
+      const isMatch = await bcrypt.compare(password, user.password)
+
+      if(isMatch) {
+          return res.status(400).json({message: "Incorrect password, try again"})
+      }
+
+     
+   
+    }  catch (error) {
+       next(error);
+     }
+         
 })
 module.exports = router
