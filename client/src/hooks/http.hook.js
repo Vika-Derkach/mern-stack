@@ -8,6 +8,11 @@ const useHttp = () => {
     async (url, method = "GET", body = null, headers = {}) => {
       setLoading(true);
       try {
+        if (body) {
+          body = JSON.stringify(body);
+          //щоб розуміти що ми саме json передаємо
+          headers["Content-Type"] = "application/json";
+        }
         const response = await fetch(url, {
           method,
           body,

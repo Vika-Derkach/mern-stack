@@ -12,6 +12,12 @@ const AuthPage = () => {
       [event.target.name]: event.target.value,
     });
   };
+  const registerHandler = async () => {
+    try {
+      const data = await request("/api/auth/register", "POST", { ...form });
+      console.log("Data", data);
+    } catch (e) {}
+  };
   return (
     <div className="row">
       <div className="col s6 offset-s3">
@@ -20,7 +26,7 @@ const AuthPage = () => {
           <div className="card-content white-text">
             <span className="card-title">Authorization</span>
             <div>
-              <div class="input-field">
+              <div className="input-field">
                 <input
                   placeholder="Type your email"
                   id="email"
@@ -31,7 +37,7 @@ const AuthPage = () => {
                 />
                 <label htmlFor="email">Email</label>
               </div>
-              <div class="input-field">
+              <div className="input-field">
                 <input
                   placeholder="Type your password"
                   id="password"
@@ -45,10 +51,20 @@ const AuthPage = () => {
             </div>
           </div>
           <div className="card-action">
-            <button className="btn yellow darken-4" style={{ marginRight: 10 }}>
+            <button
+              className="btn yellow darken-4"
+              style={{ marginRight: 10 }}
+              disabled={loading}
+            >
               Sign in
             </button>
-            <button className="btn grey lighten-1 black-text">Sign up</button>
+            <button
+              className="btn grey lighten-1 black-text"
+              onClick={registerHandler}
+              disabled={loading}
+            >
+              Sign up
+            </button>
           </div>
         </div>
       </div>
