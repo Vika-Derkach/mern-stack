@@ -26,6 +26,15 @@ const AuthPage = () => {
       message(data.message);
     } catch (e) {}
   };
+  const loginHandler = async () => {
+    try {
+      const data = await request("/api/auth/login", "POST", { ...form });
+      // console.log("Data", data);
+      message(data.message);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className="row">
       <div className="col s6 offset-s3">
@@ -63,6 +72,7 @@ const AuthPage = () => {
               className="btn yellow darken-4"
               style={{ marginRight: 10 }}
               disabled={loading}
+              onClick={loginHandler}
             >
               Sign in
             </button>
