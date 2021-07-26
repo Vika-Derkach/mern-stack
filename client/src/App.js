@@ -1,13 +1,21 @@
-import React from "react";
 import "materialize-css";
+import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+import AuthContext from "./context/AuthContext";
+import useAuth from "./hooks/auth.hook";
 import useRoutes from "./routes";
 function App() {
-  const routes = useRoutes(false);
+  const { token, login, logout, userId } = useAuth();
+  const isAthenteficated = !!token;
+  const routes = useRoutes(isAthenteficated);
   return (
-    <Router>
-      <div className="container">{routes}</div>
-    </Router>
+    <AuthContext.Provider
+      value={{ token, login, logout, userId, isAthenteficated }}
+    >
+      <Router>
+        <div className="container">{routes}</div>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 

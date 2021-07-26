@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import AuthContext from "../context/AuthContext";
 import useHttp from "../hooks/http.hook";
 import useMessage from "../hooks/message.hook";
 const AuthPage = () => {
+  const auth = useContext(AuthContext);
   const message = useMessage();
   const { loading, request, error, clearError } = useHttp();
   const [form, setForm] = useState({
@@ -30,6 +32,7 @@ const AuthPage = () => {
     try {
       const data = await request("/api/auth/login", "POST", { ...form });
       // console.log("Data", data);
+      auth.login(data.token, data.userId);
       message(data.message);
     } catch (e) {
       console.log(e);

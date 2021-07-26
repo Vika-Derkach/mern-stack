@@ -1,5 +1,5 @@
 //з сервером
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 const useHttp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,6 +25,7 @@ const useHttp = () => {
         setLoading(false);
         return data;
       } catch (e) {
+        console.log("catch", e.message);
         setLoading(false);
         setError(e.message);
         throw e;
