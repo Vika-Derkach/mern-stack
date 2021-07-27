@@ -1,7 +1,7 @@
 {
   "port": 5000,
   "jwtSecret": "vika mern",
-    "mongoUri": "mongodb+srv://H12pb39M:H12pb39M@cluster0.f8fus.mongodb.net/mern"
-
+  "mongoUri": "mongodb+srv://H12pb39M:H12pb39M@cluster0.f8fus.mongodb.net/mern",
+  "baseUrl": "http://localhost:5000"
  
 }
