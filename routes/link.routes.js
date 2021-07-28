@@ -7,6 +7,7 @@ const router = Router();
 
 router.post("/generate", auth, async (req, res, next) => {
   try {
+    console.log("jjjjjjjjjjjjjjjjjj");
     const baseUrl = config.get("baseUrl");
     const { from } = req.body;
 
@@ -21,10 +22,10 @@ router.post("/generate", auth, async (req, res, next) => {
       code,
       to,
       from,
-      owner: req.userId,
+      owner: req.user.userId,
     });
     await link.save();
-
+    console.log(link, "link");
     res.status(201).json({ link });
   } catch (error) {
     next(error);

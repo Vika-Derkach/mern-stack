@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json({ extended: true }));
 // app.use("/", require("./routes/screen.routes"));
 app.use("/api/auth", require("./routes/auth.routes"));
-app.use("api/link", require("./routes/link.routes"));
+app.use("/api/link", require("./routes/link.routes"));
 app.use((error, req, res, next) => {
   console.error(error);
   return res.render("error");
