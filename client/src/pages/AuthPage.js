@@ -11,7 +11,6 @@ const AuthPage = () => {
     password: "",
   });
   useEffect(() => {
-    console.log("Error", error);
     message(error);
     clearError();
   }, [error, message, clearError]);
@@ -27,14 +26,14 @@ const AuthPage = () => {
   const registerHandler = async () => {
     try {
       const data = await request("/api/auth/register", "POST", { ...form });
-      // console.log("Data", data);
+
       message(data.message);
     } catch (e) {}
   };
   const loginHandler = async () => {
     try {
       const data = await request("/api/auth/login", "POST", { ...form });
-      // console.log("Data", data);
+
       auth.login(data.token, data.userId);
       message(data.message);
     } catch (e) {

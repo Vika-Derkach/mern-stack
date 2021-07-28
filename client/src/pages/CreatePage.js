@@ -13,9 +13,7 @@ const CreatePage = () => {
   }, []);
 
   const pressHandler = async (event) => {
-    console.log("enter");
     if (event.key === "Enter") {
-      console.log("enter2");
       try {
         const data = await request(
           "/api/link/generate",
@@ -28,7 +26,6 @@ const CreatePage = () => {
           }
         );
         history.push(`/detail/${data.link._id}`);
-        console.log(data);
       } catch (e) {
         console.log(e);
       }

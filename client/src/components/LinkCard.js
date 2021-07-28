@@ -1,10 +1,10 @@
 import React from "react";
 
 const LinkCard = ({ link }) => {
-  console.log(link);
   return (
     <>
       <h2>Link</h2>
+
       <p>
         Your link{" "}
         <a href={link.to} target="_blank" rel="noopener noreferrer">
@@ -19,11 +19,11 @@ const LinkCard = ({ link }) => {
       </p>
       <p>
         Quantity Clicks on the link
-        <strong>{link.clicks}</strong>
+        <strong> {link.clicks}</strong>
       </p>
       <p>
         Date of creation
-        <strong>{new Date(link.date).toLocaleDateString()}</strong>
+        <strong> {new Date(link.date).toLocaleDateString()}</strong>
       </p>
     </>
   );
