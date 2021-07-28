@@ -6,6 +6,7 @@ import AuthContext from "../context/AuthContext";
 import useHttp from "../hooks/http.hook";
 const DetailPage = () => {
   const { token } = useContext(AuthContext);
+
   const { request, loading } = useHttp();
   const [link, setLink] = useState(null);
   const linkId = useParams().id;
@@ -16,7 +17,9 @@ const DetailPage = () => {
         Authorization: `Bearer ${token}`,
       });
       setLink(fetched);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   }, [token, linkId, request]);
 
   useEffect(() => {
@@ -25,11 +28,6 @@ const DetailPage = () => {
   if (loading) {
     return <Loader />;
   }
-  return (
-    <>
-      {!loading && link && <LinkCard />}
-      <h1>Detail Page</h1>
-    </>
-  );
+  return <>{!loading && link && <LinkCard link={link} />}</>;
 };
 export default DetailPage;
